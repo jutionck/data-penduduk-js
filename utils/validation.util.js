@@ -18,12 +18,6 @@ export function isOfficeOpen(day, hour) {
   }
 }
 
-export function isGenderValid(gender) {
-  return (
-    gender.toLowerCase() === "laki-laki" || gender.toLowerCase() === "perempuan"
-  );
-}
-
 export function require(population) {
   return (
     population.id ||

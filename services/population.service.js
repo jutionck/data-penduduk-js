@@ -1,7 +1,6 @@
 import { generateNik } from "../utils/nik-generator.js";
 import {
   isExist,
-  isGenderValid,
   isOfficeOpen,
   nikValidation,
   require,
@@ -30,6 +29,8 @@ export default class PopulationService {
           return reject("NIK tidak lebih dan kurang dari 16 digit");
 
         population.nik = nik;
+        if (this.isDataNikExist(population)) return reject(`NIK ${nik} sudah terdaftar disistem!`);
+
         this.population.push(population);
         return resolve(population)
       }, 1000);
@@ -54,5 +55,9 @@ export default class PopulationService {
         else reject(`NIK ${nik} tidak ditemukan!`)
       }, 1000);
     })
+  }
+
+  isDataNikExist(population) {
+    return this.population.find((p) => p.nik === population.nik);
   }
 }
